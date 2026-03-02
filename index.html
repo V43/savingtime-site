@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jack & Indy — Saving Time</title>
+  <meta name="description" content="Jack & Indy — a heart-filled, family-friendly time-travel mystery adventure." />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Jack & Indy — Saving Time" />
+  <meta property="og:description" content="A heart-filled, family-friendly time-travel mystery adventure." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.jpg" />
+  <meta property="og:url" content="https://YOURDOMAIN.com" />
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.78);
+      --muted2:rgba(234,240,255,.62);
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(124,92,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(38,230,166,.16), transparent 55%),
+        radial-gradient(700px 600px at 50% 120%, rgba(255,180,90,.10), transparent 60%),
+        var(--bg);
+    }
+
+    .page{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Poster frame */
+    .heroPoster{
+      position: relative;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #060A14;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .heroImg{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* Ceiling darken + bottom readability */
+    .heroShade{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 450px at 50% 0%, rgba(0,0,0,.38), transparent 56%),
+        linear-gradient(to top, rgba(0,0,0,.74), rgba(0,0,0,0) 48%);
+    }
+
+    /* Pixar-lite dust */
+    .heroDust{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      opacity: .34;
+      filter: blur(.2px);
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,210,150,.55) 0 1px, transparent 2px),
+        radial-gradient(circle at 60% 40%, rgba(255,235,190,.45) 0 1px, transparent 2px),
+        radial-gradient(circle at 82% 22%, rgba(255,175,95,.35) 0 1px, transparent 2px),
+        radial-gradient(circle at 28% 78%, rgba(255,220,170,.40) 0 1px, transparent 2px);
+      background-size: 240px 240px, 260px 260px, 280px 280px, 320px 320px;
+      animation: dustFloat 14s linear infinite;
+    }
+
+    @keyframes dustFloat{
+      0%   { transform: translate3d(0,0,0); }
+      50%  { transform: translate3d(-18px, 10px,0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    /* CTA bar */
+    .heroCTA{
+      position:absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,28,.58);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+
+    .ctaCopy{ min-width: 220px; }
+    .ctaTitle{
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: .2px;
+      text-shadow: 0 2px 14px rgba(0,0,0,.55);
+    }
+    .ctaSub{
+      margin-top: 2px;
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .ctaForm{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content: flex-end;
+      flex: 1;
+      position: relative;
+    }
+
+    .ctaInput{
+      flex: 1 1 240px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      outline:none;
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .ctaInput::placeholder{ color: rgba(234,240,255,.45); }
+
+    .ctaInput:focus{
+      border-color: rgba(255,180,90,.65);
+      box-shadow: 0 0 0 4px rgba(255,180,90,.18);
+    }
+
+    .ctaInput.good{
+      border-color: rgba(46,230,166,.60);
+      box-shadow: 0 0 0 4px rgba(46,230,166,.12);
+    }
+
+    .ctaInput.bad{
+      border-color: rgba(255,120,120,.65);
+      box-shadow: 0 0 0 4px rgba(255,120,120,.14);
+    }
+
+    .ctaBtn{
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,180,90,.40);
+      background: linear-gradient(135deg, #ffcc66, #ff7a3d);
+      color: #111;
+      font-weight: 900;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      position: relative;
+      overflow:hidden;
+      transition: transform .08s ease, filter .15s ease, background .2s ease;
+      user-select:none;
+      white-space: nowrap;
+    }
+
+    .ctaBtn:hover{ filter: brightness(1.06); }
+    .ctaBtn:active{ transform: translateY(1px); }
+    .ctaBtn:disabled{ opacity:.9; cursor: default; }
+
+    .ctaMsg{
+      width: 100%;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Loading shimmer */
+    .ctaBtn.is-loading::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.55), transparent 60%);
+      animation: shimmer 1.1s linear infinite;
+      opacity: .32;
+    }
+
+    @keyframes shimmer{
+      0% { transform: translateX(-25%) rotate(10deg); }
+      100% { transform: translateX(25%) rotate(10deg); }
+    }
+
+    /* Success: burst + sparkle + pulse */
+    .ctaBtn.is-success{
+      background: linear-gradient(135deg, #59f2c2, #2ee6a6);
+      border-color: rgba(46,230,166,.55);
+      color: #062016;
+      box-shadow: 0 0 0 6px rgba(46,230,166,.12), 0 16px 50px rgba(0,0,0,.35);
+      animation: successPulse 1.1s ease-out;
+    }
+
+    @keyframes successPulse{
+      0% { transform: scale(1); }
+      35% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .ctaBtn.is-success::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,.85) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,.80) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 65%, rgba(255,255,255,.70) 0 2px, transparent 3px);
+      animation: sparkles 900ms ease-out;
+      opacity: .55;
+    }
+
+    @keyframes sparkles{
+      0% { transform: scale(.7) rotate(-8deg); opacity: 0; }
+      35% { opacity: .65; }
+      100% { transform: scale(1.2) rotate(8deg); opacity: 0; }
+    }
+
+    /* Error shake */
+    .ctaBtn.shake{ animation: shake 420ms ease-in-out; }
+    @keyframes shake{
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    /* Mobile */
+    @media (max-width: 720px){
+      .page{ padding: 12px; }
+      .heroCTA{ flex-direction: column; align-items: stretch; }
+      .ctaCopy{ min-width: 0; }
+      .ctaForm{ justify-content: stretch; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="heroPoster" id="top" aria-label="Jack & Indy landing poster">
+      <!-- Put your image in the same folder: /savingtimeposter.jpg -->
+      <img class="heroImg" src="/savingtimeposter.jpg" alt="Jack & Indy key art" loading="eager" />
+
+      <div class="heroShade" aria-hidden="true"></div>
+      <div class="heroDust" aria-hidden="true"></div>
+
+      <div class="heroCTA" role="region" aria-label="Email signup">
+        <div class="ctaCopy">
+          <div class="ctaTitle">Get launch updates</div>
+          <div class="ctaSub">Teasers, behind-the-scenes, and release news.</div>
+        </div>
+
+        <!-- Replace YOUR_FORM_ID later (Formspree / Mailchimp / ConvertKit etc.) -->
+        <form class="ctaForm" id="ctaForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <input class="ctaInput" id="ctaEmail" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          <button class="ctaBtn" id="ctaBtn" type="submit">
+            <span class="btnText">Notify me</span>
+            <span class="btnIcon" aria-hidden="true">→</span>
+          </button>
+          <div class="ctaMsg" id="ctaMsg" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('ctaForm');
+    const email = document.getElementById('ctaEmail');
+    const btn = document.getElementById('ctaBtn');
+    const msg = document.getElementById('ctaMsg');
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v).trim());
+    }
+
+    function setState(state, text) {
+      btn.classList.remove('is-loading','is-success','is-error');
+      form.classList.remove('is-success','is-error');
+      if (state) btn.classList.add(state);
+      msg.textContent = text || '';
+    }
+
+    // Validate as you type
+    email.addEventListener('input', () => {
+      if (!email.value) {
+        email.classList.remove('bad','good');
+        msg.textContent = '';
+        return;
+      }
+      const ok = isValidEmail(email.value);
+      email.classList.toggle('good', ok);
+      email.classList.toggle('bad', !ok);
+    });
+
+    // Gentle parallax tilt on desktop only
+    const hero = document.querySelector('.heroPoster');
+    const canTilt = hero && matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if (canTilt) {
+      hero.addEventListener('mousemove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        hero.style.transform = `perspective(900px) rotateX(${(-y*2).toFixed(2)}deg) rotateY(${(x*2).toFixed(2)}deg)`;
+      });
+      hero.addEventListener('mouseleave', () => hero.style.transform = 'none');
+    }
+
+    // Submit via fetch so page doesn't navigate
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const value = email.value.trim();
+      if (!isValidEmail(value)) {
+        setState('is-error', 'Please enter a valid email.');
+        btn.classList.add('shake');
+        email.classList.add('bad');
+        setTimeout(() => btn.classList.remove('shake'), 450);
+        return;
+      }
+
+      setState('is-loading', 'Sending…');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: value })
+        });
+
+        if (res.ok) {
+          setState('is-success', 'You’re on the list!');
+          btn.querySelector('.btnText').textContent = 'You’re in';
+          btn.querySelector('.btnIcon').textContent = '✓';
+          email.disabled = true;
+          btn.disabled = true;
+          email.classList.remove('bad');
+          email.classList.add('good');
+        } else {
+          setState('is-error', 'Something went wrong. Try again in a moment.');
+          btn.disabled = false;
+        }
+      } catch (err) {
+        setState('is-error', 'Network error. Please try again.');
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
